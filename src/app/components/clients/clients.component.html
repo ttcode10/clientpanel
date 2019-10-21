@@ -1,1 +1,36 @@
-<p>clients works!</p>
+<div class="d-flex justify-content-between mb-3">
+    <div>
+        <h2><i class="fa fa-users"></i> Clients</h2>
+    </div>
+    <div>
+        <a [routerLink]="['/client/add']" class="btn btn-success"><i class="fa fa-plus"></i> New Client</a>
+    </div>
+</div>
+<div class="d-flex justify-content-end">
+    <h5 class="text-right text-secondary">Total Owed: {{totalOwed | currency:"USD"}} </h5>
+</div>
+<table *ngIf="clients?.length > 0; else noClients" class="table table-striped">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Balance</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let client of clients">
+            <td>{{client.firstName}} {{client.lastName}}</td>
+            <td>{{client.email}}</td>
+            <td>{{client.balance | currency:"USD"}}</td>
+            <td><a routerLink="client/{{client.id}}" class="text-secondary">Details <i class="fa fa-angle-right"></i></a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<ng-template #noClients>
+    <hr>
+    <p class="text-center text-secondary">There are no clients in the system</p>
+</ng-template>

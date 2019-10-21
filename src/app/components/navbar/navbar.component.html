@@ -5,12 +5,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
-                <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a [routerLink]="['/']" routerLinkActive="router-link-active"  class="nav-link text-white">Dashboard</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+
+            <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn && showRegister">
                 <li class="nav-item">
                     <a [routerLink]="['/register']" routerLinkActive="router-link-active"  class="nav-link text-white">Register</a>
                 </li>
@@ -18,6 +19,22 @@
                     <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="nav-link text-white">Login</a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn && !showRegister">
+            </ul>
+
+            <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+                <li class="nav-item">
+                    <a class="nav-link text-white">{{loggedInUser}}</a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/settings']" class="nav-link text-white">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" (click)="onLogOutClick()" class="nav-link text-white">LogOut</a>
+                </li>
+            </ul>
+
         </div>
     </div>
 </nav>
